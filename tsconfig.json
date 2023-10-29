@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2022",
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "strict": true,
+  },
+  "include": [
+    "./src",
+  ]
+}

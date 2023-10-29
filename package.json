@@ -1,0 +1,27 @@
+{
+  "name": "ts-fetcheasy",
+  "version": "0.0.1",
+  "description": "Fetcheasy library to build fluent API interfaces with based on fetch API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "prebuild": "rimraf build",
+    "build": "tsc",
+    "clean": "rimraf build",
+    "start": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/core-js": "2.5.7",
+    "prettier": "3.0.3",
+    "rimraf": "5.0.5",
+    "ts-node": "10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
