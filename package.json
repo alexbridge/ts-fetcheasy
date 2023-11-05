@@ -23,6 +23,7 @@
     "@types/core-js": "2.5.7",
     "@types/mocha": "^10.0.3",
     "@types/node": "^20.8.10",
+    "fetch-mock": "npm:@gr2m/fetch-mock@9.11.0-pull-request-644.1",
     "mocha": "^10.2.0",
     "prettier": "3.0.3",
     "rimraf": "5.0.5",

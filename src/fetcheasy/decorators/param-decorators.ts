@@ -1,3 +1,5 @@
+import { HttpHeader } from '../../http/http-header';
+import { MediaType } from '../../http/http-media-type';
 import { FETCHEASY, FetcheasyMethods, FetcheasyParam } from '../fetcheasy';
 export const SingleBodyTypes: FetcheasyParam[] = ['form', 'json'];
 
@@ -45,6 +47,13 @@ export function describeArgument(
               ...fetcheasy?.[methodName]?.[type],
               [name!]: parameterIndex,
             },
+        // Force request header for json body
+        ...(type === 'json' && {
+          headers: {
+            ...fetcheasy?.[methodName]?.headers,
+            [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
+          },
+        }),
       },
     } as FetcheasyMethods;
   };

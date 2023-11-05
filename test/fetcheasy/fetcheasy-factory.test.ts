@@ -1,5 +1,7 @@
 import * as assert from 'assert';
 import { FETCHEASY } from '../../src/fetcheasy/fetcheasy';
+import { HttpHeader } from '../../src/http/http-header';
+import { MediaType } from '../../src/http/http-media-type';
 import { testClient } from './rest-test-client';
 
 describe('fetcheasy / factory test', () => {
@@ -11,14 +13,19 @@ describe('fetcheasy / factory test', () => {
         },
         uri: '/api/:id',
         method: 'GET',
-        headers: {},
+        headers: {
+          [HttpHeader.ACCEPT]: MediaType.APPLICATION_JSON,
+        },
         responseMapper: undefined,
       },
       add: {
         json: 0,
         uri: '/api',
         method: 'POST',
-        headers: {},
+        headers: {
+          [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
+          [HttpHeader.ACCEPT]: MediaType.APPLICATION_JSON,
+        },
         responseMapper: undefined,
       },
       delete: {
@@ -44,7 +51,9 @@ describe('fetcheasy / factory test', () => {
         },
         uri: '/api/json/:id/:scope',
         method: 'POST',
-        headers: {},
+        headers: {
+          [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
+        },
         responseMapper: undefined,
       },
       postForm: {
@@ -66,6 +75,7 @@ describe('fetcheasy / factory test', () => {
       },
     };
 
+    // @ts-ignore
     const actual = testClient[FETCHEASY];
 
     assert.deepEqual(actual, expected);

@@ -10,24 +10,31 @@ import {
   PathParam,
   QueryParam,
 } from '../../src/fetcheasy/decorators/param-decorators';
-import { FetcheasyAware } from '../../src/fetcheasy/fetcheasy';
 import { FetcheasyApiFactory } from '../../src/fetcheasy/fetcheasy-factory';
+import { MediaType } from '../../src/http/http-media-type';
 
 export class RestTestClient {
-  @Get('/api/:id')
+  @Get({ path: '/api/:id', consumes: MediaType.APPLICATION_JSON })
   async get(@PathParam('id') id: string): Promise<string> {
     return undefined as any;
   }
 
-  @Post({ path: '/api' })
-  async add(@Json() jsonData: object): Promise<void> {}
+  @Post({
+    path: '/api',
+    consumes: MediaType.APPLICATION_JSON,
+  })
+  async add(@Json() jsonData: object): Promise<object> {
+    return undefined as any;
+  }
 
   @Delete('/api/:id')
-  async delete(@PathParam('id') id: string): Promise<void> {}
+  async delete(@PathParam('id') id: string): Promise<Response> {
+    return undefined as any;
+  }
 
-  @Post({ path: '/api/json/:id/:scope' })
+  @Post('/api/json/:id/:scope')
   async postJson(
-    @HeaderParam('X-Custom') customHeader: string,
+    @HeaderParam('x-custom') customHeader: string,
     @PathParam('id') id: string,
     @PathParam('scope') scope: string,
     @QueryParam('foo') foo: string,
@@ -36,18 +43,20 @@ export class RestTestClient {
     return undefined as any;
   }
 
-  @Post({ path: '/api/form/:id/:scope' })
+  @Post('/api/form/:id/:scope')
   async postForm(
-    @HeaderParam('X-Custom') customHeader: string,
+    @HeaderParam('x-custom') customHeader: string,
     @PathParam('id') id: string,
     @PathParam('scope') scope: string,
     @QueryParam('foo') foo: string,
-    @Form() form: object,
+    @Form() form: FormData,
   ): Promise<string> {
     return undefined as any;
   }
 }
 
-export const testClient: FetcheasyAware = FetcheasyApiFactory.builder()
+export const testClient = FetcheasyApiFactory.builder()
   .baseUrl('http://host')
+  //.requestChain(new MiddlewareChain<Request, Response>(fetchMock.sandbox()))
+  .basicAuthentication('test', 'test')
   .build(RestTestClient);

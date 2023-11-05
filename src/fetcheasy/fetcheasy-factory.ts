@@ -25,8 +25,10 @@ export class FetcheasyApiFactory {
 
   private fetcheasyClient: FetcheasyClient = {
     baseUrl: '',
-    requestChain: new MiddlewareChain<Request, Response>((req: Request) =>
-      fetch(req),
+    requestChain: new MiddlewareChain<Request, Response>(
+      async (req: Request) => {
+        return fetch(req);
+      },
     ),
   };
 
@@ -57,7 +59,7 @@ export class FetcheasyApiFactory {
     return this;
   }
 
-  public build<T>(apiType: ClassLike<T>): T & FetcheasyAware {
+  public build<T>(apiType: ClassLike<T>): T {
     this.responseInterceptor(contentTypeResponseMapper);
 
     const instance = new apiType() as FetcheasyAware;
