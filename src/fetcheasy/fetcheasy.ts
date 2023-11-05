@@ -25,16 +25,16 @@ export type FetcheasyMethodHttpConfig = {
 };
 
 export type FetcheasyResponseMapper = {
-  responseMapper: UnaryAny;
+  responseMapper?: UnaryAny;
 };
 
 export type FetcheasyMethodConfig = {
-  path: FetcheasyParamMap;
-  query: FetcheasyParamMap;
-  header: FetcheasyParamMap;
-  headers: ObjectStringsLike;
-  form: number;
-  json: number;
+  path?: FetcheasyParamMap;
+  query?: FetcheasyParamMap;
+  header?: FetcheasyParamMap;
+  headers?: ObjectStringsLike;
+  form?: number;
+  json?: number;
 } & FetcheasyResponseMapper &
   FetcheasyMethodHttpConfig;
 

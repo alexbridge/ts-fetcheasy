@@ -57,7 +57,7 @@ export class FetcheasyApiFactory {
     return this;
   }
 
-  public build<T>(apiType: ClassLike<T>): T {
+  public build<T>(apiType: ClassLike<T>): T & FetcheasyAware {
     this.responseInterceptor(contentTypeResponseMapper);
 
     const instance = new apiType() as FetcheasyAware;

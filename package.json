@@ -11,6 +11,8 @@
   "scripts": {
     "prebuild": "rimraf build",
     "build": "tsc",
+    "test": "mocha -r ts-node/register test/**/**/**/*.test.ts",
+    "format": "prettier --write src test",
     "clean": "rimraf build",
     "start": "ts-node src/index.ts"
   },
@@ -19,6 +21,9 @@
   "license": "ISC",
   "devDependencies": {
     "@types/core-js": "2.5.7",
+    "@types/mocha": "^10.0.3",
+    "@types/node": "^20.8.10",
+    "mocha": "^10.2.0",
     "prettier": "3.0.3",
     "rimraf": "5.0.5",
     "ts-node": "10.9.1",

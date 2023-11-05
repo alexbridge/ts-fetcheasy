@@ -8,13 +8,13 @@ export class FetcheasyRequestHelper {
   ) {}
 
   getBody(): BodyInit | null {
-    const jsonArg = this.methodConfig.json;
-    if (this.hasArg(jsonArg)) {
+    const jsonArg = this.methodConfig.json ?? null;
+    if (jsonArg !== null && this.hasArg(jsonArg)) {
       return JSON.stringify(this.args[jsonArg]);
     }
 
-    const formArg = this.methodConfig.form;
-    if (this.hasArg(formArg)) {
+    const formArg = this.methodConfig.form ?? null;
+    if (formArg !== null && this.hasArg(formArg)) {
       return this.args[formArg];
     }
 

@@ -27,8 +27,8 @@ export function describeArgument(
 ): ParameterDecorator {
   return function (target: any, methodName: any, parameterIndex: number): void {
     const fetcheasy = target[FETCHEASY] as FetcheasyMethods;
-    const singleBodyIndex = fetcheasy?.[methodName]?.[type];
-    if (SingleBodyTypes.includes(type) && singleBodyIndex) {
+    const singleBodyIndex = fetcheasy?.[methodName]?.[type] ?? null;
+    if (SingleBodyTypes.includes(type) && singleBodyIndex !== null) {
       throw new Error(
         `Method argument already defines ${type} at index [${singleBodyIndex}]`,
       );
