@@ -6,9 +6,10 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "strict": true,
+    "declaration": true,
+    "skipLibCheck": true,
   },
-  "include": [
-    "./src",
-    "./test",
+  "files": [
+    "src/index.ts"
   ]
 }

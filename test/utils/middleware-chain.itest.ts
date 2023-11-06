@@ -1,4 +1,7 @@
-import { MiddlewareChain, MiddlewareExchange } from './middleware-chain';
+import {
+  MiddlewareChain,
+  MiddlewareExchange,
+} from '../../src/utils/middleware-chain';
 
 const reqToResp: MiddlewareExchange<Request, Response> = (req: Request) => {
   console.count('\t\tRequest 1 -> Response 1');

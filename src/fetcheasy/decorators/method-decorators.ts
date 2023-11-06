@@ -70,6 +70,10 @@ export function Post(options: ApiMethodOptions): MethodDecorator {
   return ApiMethod('POST', options);
 }
 
+export function Put(options: ApiMethodOptions): MethodDecorator {
+  return ApiMethod('PUT', options);
+}
+
 export function Delete(options: ApiMethodOptions): MethodDecorator {
   return ApiMethod('DELETE', options);
 }

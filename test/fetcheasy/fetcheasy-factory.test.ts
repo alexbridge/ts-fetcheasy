@@ -47,7 +47,7 @@ describe('fetcheasy / factory test', () => {
           id: 1,
         },
         header: {
-          'X-Custom': 0,
+          'x-custom': 0,
         },
         uri: '/api/json/:id/:scope',
         method: 'POST',
@@ -66,7 +66,7 @@ describe('fetcheasy / factory test', () => {
           id: 1,
         },
         header: {
-          'X-Custom': 0,
+          'x-custom': 0,
         },
         uri: '/api/form/:id/:scope',
         method: 'POST',

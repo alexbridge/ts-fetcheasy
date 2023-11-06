@@ -1,23 +1,27 @@
 {
-  "name": "ts-fetcheasy",
+  "name": "fetcheasy",
   "version": "0.0.1",
-  "description": "Fetcheasy library to build fluent API interfaces with based on fetch API",
+  "description": "Fetcheasy library to build declarative API interfaces, based on fetch API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
   ],
+  "author": "alexbridge <alexbridge.de@gmail.com>",
   "scripts": {
-    "prebuild": "rimraf build",
+    "prebuild": "rimraf dist",
     "build": "tsc",
     "test": "mocha -r ts-node/register test/**/**/**/*.test.ts",
     "format": "prettier --write src test",
     "clean": "rimraf build",
     "start": "ts-node src/index.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "fetch",
+    "typescript",
+    "decorator"
+  ],
   "license": "ISC",
   "devDependencies": {
     "@types/core-js": "2.5.7",

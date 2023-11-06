@@ -1,8 +1,8 @@
+import * as assert from 'assert';
 import * as fetchMock from 'fetch-mock';
 import { HttpHeader } from '../../src/http/http-header';
 import { MediaType } from '../../src/http/http-media-type';
 import { testClient } from './rest-test-client';
-import assert = require('assert');
 
 describe('fetcheasy / rest test', () => {
   const entity = { foo: 'bar' };
