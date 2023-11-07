@@ -7,7 +7,7 @@ Decorator based declarative API clients.
 Install NPM package:
 
 ```sh
-npm install fetcheasy --save
+npm install ts-fetcheasy --save
 ```
 
 **Limitation:** Min nodejs version is 18.0.0, which have `fetch` API globally available without polyfill, etc.

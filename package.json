@@ -1,14 +1,20 @@
 {
-  "name": "fetcheasy",
-  "version": "0.0.1",
+  "name": "ts-fetcheasy",
+  "version": "1.0.0",
   "description": "Fetcheasy library to build declarative API interfaces, based on fetch API",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexbridge/ts-fetcheasy.git"
+  },
+  "author": "alexbridge <alexbridge.de@gmail.com>",
+  "keywords": [
+    "fetch",
+    "typescript",
+    "decorator",
+    "declarative-api"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
-  "author": "alexbridge <alexbridge.de@gmail.com>",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc",
@@ -17,11 +23,6 @@
     "clean": "rimraf build",
     "start": "ts-node src/index.ts"
   },
-  "keywords": [
-    "fetch",
-    "typescript",
-    "decorator"
-  ],
   "license": "ISC",
   "devDependencies": {
     "@types/core-js": "2.5.7",
