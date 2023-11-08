@@ -56,7 +56,7 @@ import {
   FetcheasyApiFactory,
   logRequestInterceptor,
   logResponseInterceptor,
-} from 'fetcheasy';
+} from 'ts-fetcheasy';
 
 @Module({
   providers: [
