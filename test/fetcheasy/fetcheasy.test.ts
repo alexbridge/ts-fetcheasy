@@ -42,8 +42,9 @@ describe('fetcheasy / rest test', () => {
   it('should get entity', async () => {
     fetchMock.getOnce(
       {
-        url: 'http://host/api/1',
+        url: 'http://host/api/1?key=api-key',
         headers: {
+          'X-Version': '2.0',
           [HttpHeader.ACCEPT]: MediaType.APPLICATION_JSON,
           [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
         },

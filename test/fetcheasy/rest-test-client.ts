@@ -13,8 +13,14 @@ import {
 import { FetcheasyApiFactory } from '../../src/fetcheasy/fetcheasy-factory';
 import { MediaType } from '../../src/http/http-media-type';
 
+export const API_KEY = Symbol('API_KEY');
+
 export class RestTestClient {
-  @Get({ path: '/api/:id', consumes: MediaType.APPLICATION_JSON })
+  @Get({
+    path: '/api/:id',
+    consumes: MediaType.APPLICATION_JSON,
+    paramsSet: API_KEY,
+  })
   async get(@PathParam('id') id: string): Promise<string> {
     return undefined as any;
   }
@@ -57,6 +63,17 @@ export class RestTestClient {
 
 export const testClient = FetcheasyApiFactory.builder()
   .baseUrl('http://host')
+  .paramsSets([
+    {
+      key: API_KEY,
+      query: {
+        key: 'api-key',
+      },
+      header: {
+        'X-Version': '2.0',
+      },
+    },
+  ])
   //.requestChain(new MiddlewareChain<Request, Response>(fetchMock.sandbox()))
   .basicAuthentication('test', 'test')
   .build(RestTestClient);

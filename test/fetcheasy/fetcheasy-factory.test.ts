@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import { FETCHEASY } from '../../src/fetcheasy/fetcheasy';
 import { HttpHeader } from '../../src/http/http-header';
 import { MediaType } from '../../src/http/http-media-type';
-import { testClient } from './rest-test-client';
+import { API_KEY, testClient } from './rest-test-client';
 
 describe('fetcheasy / factory test', () => {
   it('should define fetcheasy config on target', () => {
@@ -17,6 +17,7 @@ describe('fetcheasy / factory test', () => {
           [HttpHeader.ACCEPT]: MediaType.APPLICATION_JSON,
         },
         responseMapper: undefined,
+        paramsSet: API_KEY,
       },
       add: {
         json: 0,
@@ -27,6 +28,7 @@ describe('fetcheasy / factory test', () => {
           [HttpHeader.ACCEPT]: MediaType.APPLICATION_JSON,
         },
         responseMapper: undefined,
+        paramsSet: undefined,
       },
       delete: {
         path: {
@@ -36,6 +38,7 @@ describe('fetcheasy / factory test', () => {
         method: 'DELETE',
         headers: {},
         responseMapper: undefined,
+        paramsSet: undefined,
       },
       postJson: {
         json: 4,
@@ -55,6 +58,7 @@ describe('fetcheasy / factory test', () => {
           [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
         },
         responseMapper: undefined,
+        paramsSet: undefined,
       },
       postForm: {
         form: 4,
@@ -72,6 +76,7 @@ describe('fetcheasy / factory test', () => {
         method: 'POST',
         headers: {},
         responseMapper: undefined,
+        paramsSet: undefined,
       },
     };
 

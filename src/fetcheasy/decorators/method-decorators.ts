@@ -11,6 +11,7 @@ export type ApiMethodExpandedOptions = {
   produces?: MediaType;
   headers?: ObjectStringsLike;
   responseMapper?: UnaryAny;
+  paramsSet?: Symbol;
 };
 
 export type ApiMethodOptions = string | ApiMethodExpandedOptions;
@@ -32,6 +33,7 @@ export function methodOptions(
           ...fetcheasy?.[key]?.headers,
           ...options?.headers,
         },
+        paramsSet: options.paramsSet,
       },
     } as FetcheasyMethods;
   };

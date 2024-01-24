@@ -1,4 +1,8 @@
-import { FetcheasyClient, FetcheasyMethodConfig } from '../fetcheasy';
+import {
+  FetcheasyClient,
+  FetcheasyMethodConfig,
+  FetcheasyParamsSet,
+} from '../fetcheasy';
 
 export class FetcheasyRequestHelper {
   constructor(
@@ -22,7 +26,18 @@ export class FetcheasyRequestHelper {
   }
 
   getHeaders(): Headers {
-    const headers = new Headers(this.methodConfig.headers);
+    let initialHeaders = {};
+
+    if (this.methodConfig.paramsSet) {
+      ({ header: initialHeaders = {} } = this.findParamsSet(
+        this.methodConfig.paramsSet,
+      ));
+    }
+
+    const headers = new Headers({
+      ...initialHeaders,
+      ...this.methodConfig.headers,
+    });
 
     const headerParams = this.methodConfig.header;
     if (headerParams) {
@@ -59,23 +74,39 @@ export class FetcheasyRequestHelper {
   }
 
   private queryString() {
-    let queryParams = '';
+    const searchParams = new URLSearchParams();
     const methodQuery = this.methodConfig.query;
-    if (methodQuery) {
-      const searchParams = new URLSearchParams();
 
+    if (this.methodConfig.paramsSet) {
+      const { query = {} } = this.findParamsSet(this.methodConfig.paramsSet);
+      Object.keys(query).forEach((key) => {
+        searchParams.set(key, query[key]);
+      });
+    }
+
+    if (methodQuery) {
       Object.keys(methodQuery).forEach((key) => {
         searchParams.set(key, this.args[methodQuery[key]]);
       });
-
-      if (searchParams.size) {
-        queryParams = `?${searchParams}`;
-      }
     }
-    return queryParams;
+
+    if (searchParams.size) {
+      return `?${searchParams}`;
+    }
+    return '';
   }
 
   private hasArg(index: number): boolean {
     return index >= 0 && index < this.args.length;
+  }
+
+  private findParamsSet(key: Symbol): FetcheasyParamsSet {
+    return (
+      this.apiClient.paramsSets?.find((set) => set.key === key) || {
+        key,
+        query: {},
+        header: {},
+      }
+    );
   }
 }

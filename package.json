@@ -1,6 +1,6 @@
 {
   "name": "ts-fetcheasy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Fetcheasy library to build declarative API interfaces, based on fetch API",
   "repository": {
     "type": "git",

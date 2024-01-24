@@ -7,6 +7,7 @@ import {
   FetcheasyClient,
   FetcheasyMethodConfig,
   FetcheasyMethods,
+  FetcheasyParamsSet,
 } from './fetcheasy';
 import {
   RequestInterceptor,
@@ -25,6 +26,7 @@ export class FetcheasyApiFactory {
 
   private fetcheasyClient: FetcheasyClient = {
     baseUrl: '',
+    paramsSets: [],
     requestChain: new MiddlewareChain<Request, Response>(
       async (req: Request) => {
         return fetch(req);
@@ -36,6 +38,11 @@ export class FetcheasyApiFactory {
     this.fetcheasyClient.baseUrl = baseUrl.endsWith('/')
       ? baseUrl.substring(0, baseUrl.length - 1)
       : baseUrl;
+    return this;
+  }
+
+  public paramsSets(paramsSets: FetcheasyParamsSet[]): this {
+    this.fetcheasyClient.paramsSets = paramsSets;
     return this;
   }
 

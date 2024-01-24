@@ -5,10 +5,22 @@ import {
   FetcheasyMethodConfig,
 } from '../../../src/fetcheasy/fetcheasy';
 import { MiddlewareChain } from '../../../src/utils/middleware-chain';
+import { API_KEY } from '../rest-test-client';
 
 describe('fetcheasy / fetch / fetch-helper', () => {
   const client: FetcheasyClient = {
     baseUrl: 'http://host',
+    paramsSets: [
+      {
+        key: API_KEY,
+        query: {
+          key: 'api-key',
+        },
+        header: {
+          'X-Version': '2.0',
+        },
+      },
+    ],
     requestChain: new MiddlewareChain(() => Promise.resolve(new Response())),
   };
   const methodConfig: FetcheasyMethodConfig = {
@@ -27,6 +39,7 @@ describe('fetcheasy / fetch / fetch-helper', () => {
       public: 2,
     },
     json: 3,
+    paramsSet: API_KEY,
   };
 
   describe('fetcheasy / fetch / fetch-helper / buildUrl', () => {
@@ -38,7 +51,7 @@ describe('fetcheasy / fetch / fetch-helper', () => {
       ]);
       assert.equal(
         fetchHelper.buildUrl(),
-        'http://host/books/1/author/2?public=true',
+        'http://host/books/1/author/2?key=api-key&public=true',
       );
     });
   });
@@ -67,6 +80,7 @@ describe('fetcheasy / fetch / fetch-helper', () => {
       assert.deepEqual(
         fetchHelper.getHeaders(),
         new Headers({
+          'X-Version': '2.0',
           'x-method': 'method',
           'x-param': 'x-header',
         }),
