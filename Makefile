@@ -1,5 +1,11 @@
 link-globally:
 	npm link
 
-publish-npm:
+build:
+	npm run build
+
+minor-version:
+	npm version minor
+
+npm-publish: build minor-version
 	npm publish --access public
