@@ -13,5 +13,5 @@ minor-version: check
 patch-version: check
 	npm version patch
 
-npm-publish: build minor-version
+npm-publish: build
 	npm publish --access public
