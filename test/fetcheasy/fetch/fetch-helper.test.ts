@@ -37,6 +37,7 @@ describe('fetcheasy / fetch / fetch-helper', () => {
     },
     query: {
       public: 2,
+      format: 3,
     },
     json: 3,
     paramsSet: API_KEY,
@@ -48,10 +49,11 @@ describe('fetcheasy / fetch / fetch-helper', () => {
         1,
         2,
         'true',
+        undefined,
       ]);
       assert.equal(
         fetchHelper.buildUrl(),
-        'http://host/books/1/author/2?key=api-key&public=true',
+        'http://host/books/1/author/2?key=api-key&public=true&format=',
       );
     });
   });

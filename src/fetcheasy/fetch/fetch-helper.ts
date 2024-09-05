@@ -80,13 +80,13 @@ export class FetcheasyRequestHelper {
     if (this.methodConfig.paramsSet) {
       const { query = {} } = this.findParamsSet(this.methodConfig.paramsSet);
       Object.keys(query).forEach((key) => {
-        searchParams.set(key, query[key]);
+        searchParams.set(key, query[key] ?? '');
       });
     }
 
     if (methodQuery) {
       Object.keys(methodQuery).forEach((key) => {
-        searchParams.set(key, this.args[methodQuery[key]]);
+        searchParams.set(key, this.args[methodQuery[key]] ?? '');
       });
     }
 
