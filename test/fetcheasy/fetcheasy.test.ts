@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import * as fetchMock from 'fetch-mock';
+import fetchMock from 'fetch-mock';
 import { HttpHeader } from '../../src/http/http-header';
 import { MediaType } from '../../src/http/http-media-type';
 import { testClient } from './rest-test-client';
@@ -11,26 +11,32 @@ describe('fetcheasy / rest test', () => {
     id: 1,
   };
 
+  beforeEach(() => {
+    fetchMock.mockGlobal();
+  });
+
   afterEach(() => {
-    fetchMock.reset();
+    fetchMock.removeRoutes();
+    fetchMock.clearHistory();
+    fetchMock.unmockGlobal();
   });
 
   it('should add entity', async () => {
     fetchMock.postOnce(
-      {
-        url: 'http://host/api',
-        headers: {
-          [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
-          [HttpHeader.ACCEPT]: MediaType.APPLICATION_JSON,
-          [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
-        },
-      },
+      'http://host/api',
       {
         status: 200,
         headers: {
           [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
         },
         body: apiEntity,
+      },
+      {
+        headers: {
+          [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
+          [HttpHeader.ACCEPT]: MediaType.APPLICATION_JSON,
+          [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
+        },
       },
     );
 
@@ -41,20 +47,20 @@ describe('fetcheasy / rest test', () => {
 
   it('should get entity', async () => {
     fetchMock.getOnce(
-      {
-        url: 'http://host/api/1?key=api-key',
-        headers: {
-          'X-Version': '2.0',
-          [HttpHeader.ACCEPT]: MediaType.APPLICATION_JSON,
-          [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
-        },
-      },
+      'http://host/api/1?key=api-key',
       {
         status: 200,
         headers: {
           [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
         },
         body: apiEntity,
+      },
+      {
+        headers: {
+          'X-Version': '2.0',
+          [HttpHeader.ACCEPT]: MediaType.APPLICATION_JSON,
+          [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
+        },
       },
     );
 
@@ -65,14 +71,14 @@ describe('fetcheasy / rest test', () => {
 
   it('should delete entity', async () => {
     fetchMock.deleteOnce(
+      'http://host/api/1',
       {
-        url: 'http://host/api/1',
+        status: 204,
+      },
+      {
         headers: {
           [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
         },
-      },
-      {
-        status: 204,
       },
     );
 
@@ -84,20 +90,20 @@ describe('fetcheasy / rest test', () => {
 
   it('should post json with query params, plain text', async () => {
     fetchMock.postOnce(
-      {
-        url: 'http://host/api/json/10/public?foo=bar',
-        headers: {
-          [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
-          [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
-          'x-custom': 'custom-header',
-        },
-      },
+      'http://host/api/json/10/public?foo=bar',
       {
         status: 200,
         headers: {
           [HttpHeader.CONTENT_TYPE]: MediaType.TEXT_PLAIN,
         },
         body: 'accepted',
+      },
+      {
+        headers: {
+          [HttpHeader.CONTENT_TYPE]: MediaType.APPLICATION_JSON,
+          [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
+          'x-custom': 'custom-header',
+        },
       },
     );
 
@@ -114,19 +120,19 @@ describe('fetcheasy / rest test', () => {
 
   it('should post form with query params, plain text', async () => {
     fetchMock.postOnce(
-      {
-        url: 'http://host/api/form/10/public?foo=bar',
-        headers: {
-          [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
-          'x-custom': 'custom-header',
-        },
-      },
+      'http://host/api/form/10/public?foo=bar',
       {
         status: 200,
         headers: {
           [HttpHeader.CONTENT_TYPE]: MediaType.TEXT_PLAIN,
         },
         body: 'accepted',
+      },
+      {
+        headers: {
+          [HttpHeader.AUTHORIZATION]: 'Basic dGVzdDp0ZXN0',
+          'x-custom': 'custom-header',
+        },
       },
     );
 

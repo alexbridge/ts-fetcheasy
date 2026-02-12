@@ -14,6 +14,7 @@ export type FetcheasyClient = {
   baseUrl: string;
   paramsSets?: FetcheasyParamsSet[];
   requestChain: MiddlewareChain<Request, Response>;
+  timeoutMs?: number;
 };
 
 export type FetcheasyParam = 'path' | 'query' | 'header' | 'form' | 'json';

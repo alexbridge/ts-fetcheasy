@@ -61,6 +61,11 @@ export class FetcheasyApiFactory {
     return this;
   }
 
+  public timeout(ms: number): this {
+    this.fetcheasyClient.timeoutMs = ms;
+    return this;
+  }
+
   public basicAuthentication(userName: string, password: string): this {
     this.requestInterceptor(basicAuthRequestInterceptor(userName, password));
     return this;
@@ -94,6 +99,9 @@ export class FetcheasyApiFactory {
             method: methodConfig.method,
             headers: fetchHelper.getHeaders(),
             body: fetchHelper.getBody(),
+            signal: fetcheasyClient.timeoutMs
+              ? AbortSignal.timeout(fetcheasyClient.timeoutMs)
+              : undefined,
           });
 
           return fetcheasyChain.request(req).then(async (resp) => {

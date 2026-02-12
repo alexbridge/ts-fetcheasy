@@ -5,15 +5,16 @@ import { HttpError } from '../http/http';
 import { ApiListmonkSubscribers } from './listmonk-api';
 
 export const listmonkSubscribers = FetcheasyApiFactory.builder()
-  .baseUrl('https://ml.welearn.schule')
+  .baseUrl('https://listmonk.example.com')
   .basicAuthentication('listmonk', 'listmonk')
   .requestInterceptor(logRequestInterceptor)
   .responseInterceptor(logResponseInterceptor)
+  .timeout(2_000)
   .build(ApiListmonkSubscribers);
 
 async function run() {
   const subscriber = await listmonkSubscribers.addSubscriber({
-    email: 'sascha@welearn.schule',
+    email: 'sascha@example.com',
     name: 'The Subscriber',
     status: 'enabled',
     lists: [1],
